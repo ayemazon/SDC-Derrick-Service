@@ -33,8 +33,31 @@ npm run react-dev
 
 ### Run server
 ```sh
-npm run server-dev
+v
 ```
 
+### CRUD APIs
+
+Create API
+------
+```
+**GET** /product/:id
+```
+- Get/Fetch record of image/images based on the ID provided.
+
+```
+**POST** /product/:id
+```
+- This will create a new record within the given table. This query will need to save the new record using the information from the request body
+
+```
+**PUT** /product/:id
+```
+- This endpoint will replace an existing record image with a new one. The needed info is the table name and the ID of the item to be replaced
+
+```
+**DELETE** /product/:id
+```
+- This will delete the record, the table name and ID are needed for this action so it can be added to the query
 
 

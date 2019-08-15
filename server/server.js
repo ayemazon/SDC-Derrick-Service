@@ -15,6 +15,8 @@ app.use(morgan('dev'));
 
 app.use('/products/:id', express.static(__dirname + '/../dist'));
 
+app.post('/')
+
 app.get('/product/:id', (req, res) => {
   dbConnection.queryDB(req.params.id, (result) => {
     res.send(result);
@@ -23,11 +25,40 @@ app.get('/product/:id', (req, res) => {
 
 app.get('/data/grab', (req, res) => {
   dbConnection.connection.query('SELECT * FROM photos', (err, data) => {
-    if(err){return console.log(err, 'err')}
+    if(err){return cconsole.error(err, 'err')}
     res.send(data);
   })
 })
 
+app.post('/product/:id', (req, res) => {
+  dbConnection.connection.query('INSERT INTO xx_BLOB(IMAGE) VALUES(LOAD_FILE('someImage.jpg'))', (req, res) => {
+    if (err) {
+      console.error(`Could not add image to database, see ${err}`)
+    } else {
+      console.log(`Image was added at ID: ${req.params.id}`)
+    }
+  })
+})
+
+app.put('/product/:id', (req, res) => {
+  dbConnection.connection.query(`UPDATE photos SET tagID = ${req.params.id} WHERE tagID = tagID`, (req, res) => {
+    if (err) {
+      console.error(`Something didnt go as expected`)
+    } else {
+      console.log(`This record has been updated!`)
+    }
+  })
+})
+
+app.delete('/product/:id', (req, res) => {
+  dbConnection.connection.query('DELETE FROM photos WHERE condition', (req, res) => {
+        if (err) {
+          console.error(err)
+        } else {
+          console.log(`Your record ?? has been deleted`);
+        }
+  })
+})
 app.listen(port, () => {
   console.log('Listening on port ' + port)
 })
