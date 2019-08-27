@@ -1,15 +1,11 @@
-DROP DATABASE IF EXISTS amazon;
+DROP DATABASE IF EXISTS sdc_postgres;
 
-CREATE DATABASE amazon;
+CREATE DATABASE sdc_postgres;
 
-USE amazon;
+USE sdc_postgres;
 
-CREATE TABLE photos (
-  id INT (255) AUTO_INCREMENT,
-  photoid VARCHAR(15),
-  link VARCHAR(255),
-  username VARCHAR(128),
-  productTag VARCHAR(64),
-  tagID INT(255),
-  PRIMARY KEY (id)
+CREATE TABLE gallery (
+  imgid INT AUTO_INCREMENT NOT NULL,
+  imageurl VARCHAR(255) NOT NULL,
+  PRIMARY KEY (imgid)
 )

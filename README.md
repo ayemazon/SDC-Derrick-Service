@@ -33,7 +33,7 @@ npm run react-dev
 
 ### Run server
 ```sh
-v
+npm run server-dev
 ```
 
 ### CRUD APIs
