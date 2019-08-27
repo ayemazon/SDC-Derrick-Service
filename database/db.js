@@ -11,7 +11,7 @@ client.connect()
 
 const addToDB = (imgid, imageurl) => {
   const sql = `INSERT INTO gallery (imgid, imageurl) VALUES ('${imgid}', '${imageurl}')`;
-  client.query(sql, (err, row) => {
+  await client.query(sql, (err, row) => {
     if (err) {
       console.log(err);
     } else {
@@ -22,7 +22,7 @@ const addToDB = (imgid, imageurl) => {
 
 const queryDB = (id, cb) => {
   const sql = `SELECT * FROM gallery`;
-  client.query(sql, (err, row) => {
+  await client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
 }
