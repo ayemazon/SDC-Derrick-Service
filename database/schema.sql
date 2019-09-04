@@ -1,11 +1,10 @@
-DROP DATABASE IF EXISTS sdc_postgres;
+DROP DATABASE sdc_postgres;
 
 CREATE DATABASE sdc_postgres;
 
 USE sdc_postgres;
 
 CREATE TABLE gallery (
-  imgid INT AUTO_INCREMENT NOT NULL,
-  imageurl VARCHAR(255) NOT NULL,
-  PRIMARY KEY (imgid)
-)
+  imgid BIGSERIAL NOT NULL PRIMARY KEY CONSTRAINT,
+  url VARCHAR(255) NOT NULL CONSTRAINT,
+);

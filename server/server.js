@@ -13,11 +13,11 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('dev'));
 
-app.use('/products/:id', express.static(__dirname + '/../dist'));
+app.use('/products/gallery/:id', express.static(__dirname + '/../dist'));
 
 app.post('/')
 
-app.get('/product/:id', (req, res) => {
+app.get('/product/gallery/:id', (req, res) => {
   dbConnection.queryDB(req.params.id, (result) => {
     res.send(result);
   });
@@ -40,7 +40,7 @@ app.post('/product', (req, res) => {
   })
 })
 
-app.put('/product/:id', (req, res) => {
+app.put('/product/gallery/:id', (req, res) => {
   dbConnection.connection.query(`UPDATE photos SET tagID = ${req.params.id} WHERE tagID = tagID`, (req, res) => {
     if (err) {
       console.error(`Something didnt go as expected`)

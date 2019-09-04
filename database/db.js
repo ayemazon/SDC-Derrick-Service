@@ -1,17 +1,17 @@
 const { Client } = require('pg')
 const client = new Client({
-  user: 'dbuser',
   host: 'localhost',
+  username: 'root',
+  password: 'derkmcgerk13',
   database: 'sdc_postgres',
-  password: '',
-  port: 3211,
+  port: 5432,
 });
 
-client.connect()
+client.connect();
 
-const addToDB = (imgid, imageurl) => {
-  const sql = `INSERT INTO gallery (imgid, imageurl) VALUES ('${imgid}', '${imageurl}')`;
-  await client.query(sql, (err, row) => {
+const addToDB = (imgid, url) => {
+  const sql = `INSERT INTO gallery (imgid, url) VALUES ('${imgid}', '${url}')`;
+  client.query(sql, (err, row) => {
     if (err) {
       console.log(err);
     } else {
@@ -22,7 +22,7 @@ const addToDB = (imgid, imageurl) => {
 
 const queryDB = (id, cb) => {
   const sql = `SELECT * FROM gallery`;
-  await client.query(sql, (err, row) => {
+  client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
 }
