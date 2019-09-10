@@ -10,7 +10,7 @@ const client = new Client({
 client.connect();
 
 const addToDB = (imgid, url) => {
-  const sql = `INSERT INTO gallery (imgid, url) VALUES ('${imgid}', '${url}')`;
+  const sql = `INSERT INTO gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s1.jpg')`;
   client.query(sql, (err, row) => {
     if (err) {
       console.log(err);
@@ -20,15 +20,24 @@ const addToDB = (imgid, url) => {
   })
 }
 
-const queryDB = (id, cb) => {
-  const sql = `SELECT * FROM gallery`;
+const queryDB = (imgid, cb) => {
+  const sql = `SELECT * FROM gallery where imgid=${imgid}`;
   client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
 }
 
+const deleteFromDB = (imgid, cb) => {
+  const sql = `DELETE FROM gallery where imgid=${imgid}`;
+  client.query(sql, (err, row) => {
+    return err ? console.log(err) : cb(row);
+  });
+}
+
+
 module.exports = {
   addToDB,
   client,
-  queryDB
+  queryDB,
+  deleteFromDB
 };

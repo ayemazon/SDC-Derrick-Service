@@ -40,7 +40,7 @@ app.post('/product', (req, res) => {
   })
 })
 
-app.put('/product/gallery/:id', (req, res) => {
+app.put('/product/:id', (req, res) => {
   dbConnection.connection.query(`UPDATE photos SET tagID = ${req.params.id} WHERE tagID = tagID`, (req, res) => {
     if (err) {
       console.error(`Something didnt go as expected`)
