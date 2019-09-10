@@ -3,7 +3,7 @@ const client = new Client({
   host: 'localhost',
   username: 'root',
   password: 'derkmcgerk13',
-  database: 'sdc_postgres',
+  database: 'image_gallery',
   port: 5432,
 });
 
