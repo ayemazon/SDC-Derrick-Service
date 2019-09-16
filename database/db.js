@@ -1,35 +1,43 @@
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'rpt13purp.clxq3tbepnvr.us-east-2.rds.amazonaws.com',
-  user: 'bradyliu',
-  password: '4r5t6y7u$R%T^Y&U',
-  database: 'amazon',
+const { Client } = require('pg')
+const client = new Client({
+  host: 'localhost',
+  username: 'root',
+  password: 'derkmcgerk13',
+  database: 'image_gallery',
+  port: 5432,
 });
 
-connection.connect();
+client.connect();
 
-const insertIntoDB = (photoid, username, link, productTag, tagID) => {
-  const sql = `INSERT INTO photos (photoid, link, username, productTag, tagID)
-               VALUES ('${photoid}', '${link}', '${username}', '${productTag}', '${tagID}')`;
-  connection.query(sql, (err, row) => {
+const addToDB = (imgid, url) => {
+  const sql = `INSERT INTO gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s1.jpg')`;
+  client.query(sql, (err, row) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('record inserted successefully! from the db');
+      console.log('Image URL inserted into DB');
     }
   })
 }
 
-const queryDB = (id, cb) => {
-  const sql = `SELECT link FROM photos WHERE tagID = ${id}`;
-  connection.query(sql, (err, row) => {
-    // console.log(row, 'data from queryDB');
+const queryDB = (imgid, cb) => {
+  const sql = `SELECT * FROM gallery where imgid=${imgid}`;
+  client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
 }
 
+const deleteFromDB = (imgid, cb) => {
+  const sql = `DELETE FROM gallery where imgid=${imgid}`;
+  client.query(sql, (err, row) => {
+    return err ? console.log(err) : cb(row);
+  });
+}
+
+
 module.exports = {
-  insertIntoDB,
-  connection,
-  queryDB
+  addToDB,
+  client,
+  queryDB,
+  deleteFromDB
 };

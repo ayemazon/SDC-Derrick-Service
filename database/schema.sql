@@ -1,15 +1,24 @@
-DROP DATABASE IF EXISTS amazon;
+DROP DATABASE IF EXISTS image_gallery;
 
-CREATE DATABASE amazon;
+CREATE DATABASE image_gallery;
 
-USE amazon;
+CREATE TABLE gallery (
+  imgid BIGSERIAL NOT NULL PRIMARY KEY,
+  url VARCHAR(255) NOT NULL
+);
 
-CREATE TABLE photos (
-  id INT (255) AUTO_INCREMENT,
-  photoid VARCHAR(15),
-  link VARCHAR(255),
-  username VARCHAR(128),
-  productTag VARCHAR(64),
-  tagID INT(255),
-  PRIMARY KEY (id)
-)
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s1.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s2.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s3.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s4.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s5.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s6.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s7.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s8.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s9.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s10.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s11.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s12.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s13.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s14.jpg');
+insert into gallery (url) values ('https://rpt14-sdc-derrick.s3.amazonaws.com/images/s15.jpg');
