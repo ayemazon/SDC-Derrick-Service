@@ -20,15 +20,22 @@ const addToDB = (imgid, url) => {
   })
 }
 
+const updateImageVal = (imgid, cb) => {
+  const sql = `Update gallery set imgid = 9999999 where imgid=2`;
+  client.query(sql, (err, row) => {
+    return err ? console.log(err) : cb(row)
+  })
+}
+
 const queryDB = (imgid, cb) => {
-  const sql = `SELECT * FROM gallery where imgid=${imgid}`;
+  const sql = `SELECT * FROM gallery where imgid=10000000`;
   client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
 }
 
 const deleteFromDB = (imgid, cb) => {
-  const sql = `DELETE FROM gallery where imgid=${imgid}`;
+  const sql = `DELETE FROM gallery where imgid=1`;
   client.query(sql, (err, row) => {
     return err ? console.log(err) : cb(row);
   });
@@ -39,5 +46,6 @@ module.exports = {
   addToDB,
   client,
   queryDB,
+  updateImageVal,
   deleteFromDB
 };
