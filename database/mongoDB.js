@@ -20,7 +20,7 @@ let imageGallerySchema = mongoose.Schema({
 let ImageGalleryDetails = mongoose.model('imageGallery', imageGallerySchema);
 
 let saveImageUrl = (imageDetails) => {
-  ImageGalleryDetails.insertOne({ur: 'https://rpt14-sdc-derrick.s3.amazonaws.com/images/s1.jpg'});
+  ImageGalleryDetails.insertOne({url: `${imageDetails}`});
   }
 let deleteDB = () => {
   dbConnect.dropDatabase();
@@ -36,7 +36,7 @@ let updateImage = () => {
     _id: ObjectId('5d79ba62b710cd2e6a839647')}, {upsert: true})
 }
 
-let deleteAImage = (param) => {
+let deleteManyImage = (param) => {
   ImageGalleryDetails.findByIdAndRemove(param).exec(() => {
     console.log('Image has been deleted.');
   });
@@ -68,7 +68,7 @@ let insertIntoMongoDb = () => {
 // the insertIntoMongoDb is being called 700000  times and each time its adding 15 records into the DB totalling 10.5 million
 module.exports.saveImageUrl = saveImageUrl;
 module.exports.findAImage = findAImage;
-module.exports.deleteAImage = deleteAImage;
+module.exports.deleteManyImage = deleteManyImage;
 module.exports.deleteDB = deleteDB;
 module.exports.updateImage = updateImage;
 module.exports.insertIntoMongoDb = insertIntoMongoDb;

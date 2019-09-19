@@ -7,6 +7,9 @@ const port = process.env.port || 3005;
 const cors = require('cors');
 const morgan = require('morgan');
 const getImages = require('../database/mongoDB.js').getImages;
+const saveImageUrl = require('../database/mongoDB.js').saveImageUrl;
+const updateImage = require('../database/mongoDB.js').updateImage;
+const deleteManyImage = require('../database/mongoDB.js').deleteManyImage;
 
 app.use(express.static(__dirname + './../dist'));
 app.use(bodyParser.urlencoded({ extended : false}));
@@ -26,33 +29,15 @@ app.get('/gallery', (req, res) => {
 });
 
 app.post('/gallery', (req, res) => {
-  dbConnection.connection.query(`INSERT INTO xx_BLOB(IMAGE) VALUES(LOAD_FILE('someImage.jpg'))`, (req, res) => {
-    if (err) {
-      console.error(`Could not add image to database, see ${err}`)
-    } else {
-      console.log(`Image was added at ID: ${req.params.id}`)
-    }
-  })
+  saveImageUrl(req.body.url)
 })
 
 app.put('/gallery', (req, res) => {
-  dbConnection.connection.query(`UPDATE photos SET tagID = ${req.params.id} WHERE tagID = tagID`, (req, res) => {
-    if (err) {
-      console.error(`Something didnt go as expected`)
-    } else {
-      console.log(`This record has been updated!`)
-    }
-  })
+  updateImage()
 })
 
 app.delete('/gallery', (req, res) => {
-  dbConnection.connection.query(`DELETE FROM photos WHERE condition`, (req, res) => {
-        if (err) {
-          console.error(err)
-        } else {
-          console.log(`Your record ?? has been deleted`);
-        }
-  })
+  deleteManyImage(req.body.id)
 })
 app.listen(port, () => {
   console.log('Listening on port ' + port)
