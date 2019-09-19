@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import axios from 'axios';
 
 import './styles.css';
 
@@ -15,26 +16,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       imagesData: [],
-      keyword: 'Computer',
-      value: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    fetch(`http://ec2-52-14-77-150.us-east-2.compute.amazonaws.com:3005/product/${window.location.href.split('/')[4] || 1}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data, 'this is from component did mount in index.jsx');
-        this.setState({
-          imagesData: data,
-        });
+    axios.get('/')
+      .then((images) => {
+        this.setState({imagesData: images.data})
+      })
+    }
+      // .then((res) => res.json())
+      // .then((data) => {
+      //   // console.log(data, 'this is from component did mount in index.jsx');
+      //   this.setState({
+      //     imagesData: data,
+      //   });
         // console.log(data[0].productTag);
         // let imageSet = [];
         // for (let i = 0; i < data.length; i++) {
@@ -46,7 +44,7 @@ class App extends React.Component {
         // this.setState({
         //   imagesData: imageSet
         // })
-      });
+      // });
   }
 
   // componentDidUpdate() {
@@ -87,65 +85,65 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <AppBar
-          style={{padding: '0 20px 0', backgroundColor: '#232f3e', height: '7%' }}
-        >
-          <Toolbar style={{ padding: '0px' }}>
-            <IconButton
-              edge="start"
-              style={{ marginRight: '5px' }}
-              color="inherit"
-              aria-label="Open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <h2>Amazon</h2>
-            <div
-              style={{
-                backgroundColor: 'white',
-                marginLeft: '20%',
-                padding: '5px',
-                borderRadius: '5px',
-                position: 'relative',
-                width: '32%',
-              }}
-            >
-              <div style={{ width: '70%' }}>
-                <SearchIcon
-                  style={{
-                    color: 'black',
-                    height: '86%',
-                    position: 'absolute',
-                    pointerEvents: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '1.4em',
-                  }}
-                />
-                {/* <form onSubmit={this.handleSubmit}> */}
-                {/* <label> */}
-                {/* Search */}
-                {/* <input type="text" /> */}
-                <InputBase
-                  placeholder="Search…"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  inputProps={{ 'aria-label': 'Search' }}
-                  style={{
-                    color: 'black',
-                    marginLeft: '5px',
-                    display: 'inline-block',
-                    width: '72%',
-                    border: 'none',
-                  }}
-                />
-              </div>
-            </div>
-            {/* </label> */}
-            {/* </form> */}
-          </Toolbar>
-        </AppBar>
+        // <AppBar
+        //   style={{padding: '0 20px 0', backgroundColor: '#232f3e', height: '7%' }}
+        // >
+        //   <Toolbar style={{ padding: '0px' }}>
+        //     <IconButton
+        //       edge="start"
+        //       style={{ marginRight: '5px' }}
+        //       color="inherit"
+        //       aria-label="Open drawer"
+        //     >
+        //       <MenuIcon />
+        //     </IconButton>
+        //     <h2>Amazon</h2>
+        //     <div
+        //       style={{
+        //         backgroundColor: 'white',
+        //         marginLeft: '20%',
+        //         padding: '5px',
+        //         borderRadius: '5px',
+        //         position: 'relative',
+        //         width: '32%',
+        //       }}
+        //     >
+        //       <div style={{ width: '70%' }}>
+        //         <SearchIcon
+        //           style={{
+        //             color: 'black',
+        //             height: '86%',
+        //             position: 'absolute',
+        //             pointerEvents: 'none',
+        //             display: 'flex',
+        //             alignItems: 'center',
+        //             justifyContent: 'center',
+        //             width: '1.4em',
+        //           }}
+        //         />
+        //         {/* <form onSubmit={this.handleSubmit}> */}
+        //         {/* <label> */}
+        //         {/* Search */}
+        //         {/* <input type="text" /> */}
+        //         <InputBase
+        //           placeholder="Search…"
+        //           value={this.state.value}
+        //           onChange={this.handleChange}
+        //           inputProps={{ 'aria-label': 'Search' }}
+        //           style={{
+        //             color: 'black',
+        //             marginLeft: '5px',
+        //             display: 'inline-block',
+        //             width: '72%',
+        //             border: 'none',
+        //           }}
+        //         />
+        //       </div>
+        //     </div>
+        //     {/* </label> */}
+        //     {/* </form> */}
+        //   </Toolbar>
+        // </AppBar>
         <ProductView images={this.state.imagesData} />
       </>
     );

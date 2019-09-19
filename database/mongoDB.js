@@ -26,9 +26,11 @@ let deleteDB = () => {
   dbConnect.dropDatabase();
 }
 let findAImage = () => {
-  return ImageGalleryDetails.findOne({}, {_id: ObjectId('5d79ba63b710cd2e6a83991a')}).exec();
+  return ImageGalleryDetails.findOne({_id: ObjectId('5d79ba63b710cd2e6a83991a')}).exec();
 }
-
+let getImages = () => {
+  return ImageGalleryDetails.find().sort({_id: -1}).limit(1000)
+}
 let updateImage = () => {
   return ImageGalleryDetails.findOneAndUpdate({_id: ObjectId('5d79ba62b710cd2e6a83963f')}, {
     _id: ObjectId('5d79ba62b710cd2e6a839647')}, {upsert: true})
@@ -70,4 +72,6 @@ module.exports.deleteAImage = deleteAImage;
 module.exports.deleteDB = deleteDB;
 module.exports.updateImage = updateImage;
 module.exports.insertIntoMongoDb = insertIntoMongoDb;
+
+module.exports.getImages = getImages;
 // module.exports.insertIntoMongoDb = insertIntoMongoDb;

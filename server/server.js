@@ -1,10 +1,12 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
-const dbConnection = require('./../database/db.js');
+// const dbConnection = require('./../database/db.js');
 const app = express();
 const port = process.env.port || 3005;
 const cors = require('cors');
 const morgan = require('morgan');
+const getImages = require('../database/mongoDB.js').getImages;
 
 app.use(express.static(__dirname + './../dist'));
 app.use(bodyParser.urlencoded({ extended : false}));
@@ -15,20 +17,21 @@ app.use(morgan('dev'));
 
 app.use('/products/gallery/:id', express.static(__dirname + '/../dist'));
 
-app.post('/')
 
-app.get('/product/gallery/:id', (req, res) => {
-  dbConnection.queryDB(req.params.id, (result) => {
-    res.send(result);
-  });
+app.get('/gallery', (req, res) => {
+  getImages()
+    .then((images) => {
+      res.send(images);
+    })
 });
 
-app.get('/data/grab', (req, res) => {
-  dbConnection.connection.query(`SELECT * FROM photos`, (err, data) => {
-    if(err){return cconsole.error(err, 'err')}
-    res.send(data);
-  })
-})
+
+// app.get('/data/grab', (req, res) => {
+//   dbConnection.connection.query(`SELECT * FROM photos`, (err, data) => {
+//     if(err){return cconsole.error(err, 'err')}
+//     res.send(data);
+//   })
+// })
 
 app.post('/product', (req, res) => {
   dbConnection.connection.query(`INSERT INTO xx_BLOB(IMAGE) VALUES(LOAD_FILE('someImage.jpg'))`, (req, res) => {
