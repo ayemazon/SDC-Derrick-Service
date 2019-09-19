@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactImageMagnify from 'react-image-magnify';
 
+
 class ProductDisplay extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class ProductDisplay extends React.Component {
   }
 
   render() {
+
     if (!this.props.images.length) {
       return <div style={{ paddingTop: '75px' }}>Loading...</div>;
     } else {
@@ -35,11 +37,11 @@ class ProductDisplay extends React.Component {
               return (
                 <img
                   id="one-image"
-                  src={imageData.link}
-                  alt={imageData.productTag}
+                  src={imageData.url}
+                  alt={imageData.id}
                   key={index}
                   onMouseOver={() =>
-                    this.onHover(imageData.productTag, imageData.link)
+                    this.onHover(imageData.id, imageData.url)
                   }
                 />
               );
@@ -50,8 +52,8 @@ class ProductDisplay extends React.Component {
             {...{
               smallImage: {
                 src: this.state.mainImage.src || this.props.images[0].link,
-                // width: 280,
-                // height: 280,
+                width: 280,
+                height: 280,
                 isFluidWidth: true,
               },
               largeImage: {

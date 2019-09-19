@@ -29,7 +29,7 @@ let findAImage = () => {
   return ImageGalleryDetails.findOne({_id: ObjectId('5d79ba63b710cd2e6a83991a')}).exec();
 }
 let getImages = () => {
-  return ImageGalleryDetails.find().sort({_id: -1}).limit(1000)
+  return ImageGalleryDetails.find().sort({_id: -1}).limit(100)
 }
 let updateImage = () => {
   return ImageGalleryDetails.findOneAndUpdate({_id: ObjectId('5d79ba62b710cd2e6a83963f')}, {
