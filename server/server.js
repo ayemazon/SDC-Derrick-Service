@@ -25,15 +25,7 @@ app.get('/gallery', (req, res) => {
     })
 });
 
-
-// app.get('/data/grab', (req, res) => {
-//   dbConnection.connection.query(`SELECT * FROM photos`, (err, data) => {
-//     if(err){return cconsole.error(err, 'err')}
-//     res.send(data);
-//   })
-// })
-
-app.post('/product', (req, res) => {
+app.post('/gallery', (req, res) => {
   dbConnection.connection.query(`INSERT INTO xx_BLOB(IMAGE) VALUES(LOAD_FILE('someImage.jpg'))`, (req, res) => {
     if (err) {
       console.error(`Could not add image to database, see ${err}`)
@@ -43,7 +35,7 @@ app.post('/product', (req, res) => {
   })
 })
 
-app.put('/product/:id', (req, res) => {
+app.put('/gallery', (req, res) => {
   dbConnection.connection.query(`UPDATE photos SET tagID = ${req.params.id} WHERE tagID = tagID`, (req, res) => {
     if (err) {
       console.error(`Something didnt go as expected`)
@@ -53,7 +45,7 @@ app.put('/product/:id', (req, res) => {
   })
 })
 
-app.delete('/product', (req, res) => {
+app.delete('/gallery', (req, res) => {
   dbConnection.connection.query(`DELETE FROM photos WHERE condition`, (req, res) => {
         if (err) {
           console.error(err)

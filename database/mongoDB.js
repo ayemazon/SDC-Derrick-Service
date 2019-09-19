@@ -36,8 +36,8 @@ let updateImage = () => {
     _id: ObjectId('5d79ba62b710cd2e6a839647')}, {upsert: true})
 }
 
-let deleteAImage = () => {
-  ImageGalleryDetails.findByIdAndRemove({_id: ObjectId('5d79ba62b710cd2e6a8395e9')}).exec(() => {
+let deleteAImage = (param) => {
+  ImageGalleryDetails.findByIdAndRemove(param).exec(() => {
     console.log('Image has been deleted.');
   });
 }
